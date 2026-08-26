@@ -256,6 +256,40 @@ button:focus-visible {
   transition: top var(--motion-feedback) var(--ease-out), left var(--motion-feedback) var(--ease-out);
 }
 
+.coaching-frame__media {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.coaching-frame__media [data-project-media] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coaching-frame__media [data-project-media-fallback] {
+  max-width: 18rem;
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid rgba(217, 86, 63, .5);
+  background: rgba(17, 18, 20, .88);
+  color: var(--color-paper);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .coaching-frame__heading {
   position: relative;
   z-index: 1;

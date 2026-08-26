@@ -1,9 +1,13 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const projectRoot = new URL('../', import.meta.url);
+const validatorPath = fileURLToPath(new URL('../scripts/validate-site.mjs', import.meta.url));
 
 test('site keeps the visual, responsive, and progressive-enhancement contract', async () => {
   const [css, js, html] = await Promise.all([
@@ -34,4 +38,34 @@ test('production validation accepts the checked-in site contract', () => {
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /Site validation passed\./);
+});
+
+test('production validation rejects aria-disabled without the native disabled attribute', async (t) => {
+  const fixtureRoot = await mkdtemp(join(tmpdir(), 'jeong-in-ae-validation-'));
+  t.after(() => rm(fixtureRoot, { recursive: true, force: true }));
+
+  const fixtureFiles = new Map([
+    ['index.html', '<button class="consultation__button" type="button" aria-disabled="true">상담 준비 중</button>'],
+    ['package.json', '{"scripts":{"test":"node --test tests/*.test.mjs"}}'],
+    ['assets/css/site.css', ''],
+    ['assets/js/site.js', ''],
+    ['assets/js/site-behavior.js', ''],
+    ['assets/js/site-config.js', ''],
+    ['assets/fonts/PretendardVariable.woff2', ''],
+    ['tests/site-contract.test.mjs', '']
+  ]);
+
+  for (const [relativePath, contents] of fixtureFiles) {
+    const destination = join(fixtureRoot, relativePath);
+    await mkdir(dirname(destination), { recursive: true });
+    await writeFile(destination, contents);
+  }
+
+  const result = spawnSync(process.execPath, [validatorPath], {
+    cwd: fixtureRoot,
+    encoding: 'utf8'
+  });
+
+  assert.notEqual(result.status, 0, result.stdout);
+  assert.match(result.stderr, /native disabled attribute/i);
 });

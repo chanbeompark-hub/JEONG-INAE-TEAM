@@ -7,6 +7,7 @@ const requiredFiles = [
   'package.json',
   'assets/css/site.css',
   'assets/js/site.js',
+  'assets/js/site-behavior.js',
   'assets/js/site-config.js',
   'assets/fonts/PretendardVariable.woff2',
   'tests/site-contract.test.mjs'
@@ -46,7 +47,8 @@ async function validateSite() {
 
   const consultationButtons = html.match(/<button\b[^>]*class=["'][^"']*\bconsultation__button\b[^"']*["'][^>]*>/gi) || [];
   assertContract(consultationButtons.length > 0, 'index.html must include a consultation button');
-  assertContract(consultationButtons.every((button) => /\bdisabled\b/i.test(button)), 'every consultation button must keep the disabled attribute');
+  const nativeDisabledAttribute = /\sdisabled(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?(?=\s|\/?>)/i;
+  assertContract(consultationButtons.every((button) => nativeDisabledAttribute.test(button)), 'every consultation button must keep the native disabled attribute');
   pass('consultation buttons preserve native disabled semantics');
 
   process.stdout.write('Site validation passed.\n');

@@ -1,18 +1,16 @@
 import { SITE_CONFIG, resolveConsultationState } from './site-config.js';
+import { configureConsultationButton, showProjectMediaFallback } from './site-behavior.js';
 
 const buttons = [...document.querySelectorAll('.consultation__button')];
 const statusNodes = [...document.querySelectorAll('[data-consultation-status]')];
 const revealNodes = [...document.querySelectorAll('[data-reveal]')];
 const coachingFrame = document.querySelector('.coaching-frame');
-const mediaFallback = document.querySelector('[data-media-fallback]');
 
-if (buttons.length && statusNodes.length && revealNodes.length && coachingFrame && mediaFallback) {
+if (buttons.length && statusNodes.length && revealNodes.length && coachingFrame) {
   const consultation = resolveConsultationState(SITE_CONFIG.consultation);
 
   for (const button of buttons) {
-    button.textContent = consultation.label;
-    button.disabled = !consultation.enabled;
-    button.dataset.consultationHref = consultation.href || '';
+    configureConsultationButton(button, consultation, (href) => window.location.assign(href));
   }
 
   for (const statusNode of statusNodes) {
@@ -62,7 +60,6 @@ if (buttons.length && statusNodes.length && revealNodes.length && coachingFrame 
     const failedMedia = event.target;
     if (!(failedMedia instanceof Element) || !failedMedia.matches('[data-project-media]')) return;
 
-    mediaFallback.hidden = false;
-    failedMedia.replaceWith(mediaFallback);
+    showProjectMediaFallback(failedMedia);
   }, true);
 }
