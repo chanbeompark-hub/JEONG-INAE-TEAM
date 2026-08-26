@@ -1,7 +1,9 @@
 import { SITE_CONFIG, resolveConsultationState } from './site-config.js';
 import {
   configureConsultationButton,
+  revealSelectedMediaOption,
   resolveMotionPreference,
+  selectMethodMedia,
   showProjectMediaFallback
 } from './site-behavior.js';
 
@@ -33,6 +35,24 @@ if (buttons.length && statusNodes.length && revealNodes.length && coachingFrame)
   document.documentElement.classList.add('is-ready');
 
   const prefersReducedMotion = motionPreference.reduced;
+  const autoplayMedia = [...document.querySelectorAll('[data-autoplay-media]')];
+  if (!prefersReducedMotion) {
+    for (const media of autoplayMedia) media.play().catch(() => {});
+  }
+
+  const methodPlayer = document.querySelector('#method-player');
+  const methodCaption = document.querySelector('#method-media-caption');
+  const methodOptions = [...document.querySelectorAll('[data-media-option]')];
+
+  if (methodPlayer && methodCaption && methodOptions.length) {
+    for (const option of methodOptions) {
+      option.addEventListener('click', () => {
+        if (!selectMethodMedia(methodPlayer, methodCaption, methodOptions, option)) return;
+        revealSelectedMediaOption(option, prefersReducedMotion);
+      });
+    }
+  }
+
   const revealImmediately = prefersReducedMotion || !('IntersectionObserver' in window);
 
   if (revealImmediately) {

@@ -5,7 +5,11 @@ export const SITE_CONFIG = Object.freeze({
     href: null,
     status: '상담 채널을 준비하고 있습니다.'
   }),
-  media: Object.freeze({ heroVideo: null, heroPoster: null, records: Object.freeze([]) })
+  media: Object.freeze({
+    heroVideo: './assets/media/jeong-in-ae-hero.mp4',
+    heroPoster: './assets/media/jeong-in-ae-hero-poster.webp',
+    records: Object.freeze([])
+  })
 });
 
 export function resolveConsultationState(config) {

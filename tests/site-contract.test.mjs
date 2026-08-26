@@ -25,6 +25,9 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?animation-duration:\s*\.01ms\s*!important/);
   assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?\.is-ready \[data-intro\],[\s\S]*?opacity:\s*1\s*!important;[\s\S]*?transform:\s*none\s*!important/);
   assert.match(css, /\.coaching-frame__steps/);
+  assert.match(css, /\.method-media__stage/);
+  assert.match(css, /\.method-media__option\[aria-pressed="true"\]/);
+  assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.method-media__rail\s*\{[\s\S]*?grid-auto-flow:\s*column/);
   assert.match(css, /\.hero h1\s*\{[\s\S]*?font-size:\s*clamp\(3\.1rem,\s*5\.5vw,\s*5\.8rem\)/);
   assert.match(css, /\.promise article:nth-child\(n\)\s*\{[\s\S]*?grid-row:\s*auto;/);
   assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.promise article:nth-child\(1\)\s*\{\s*grid-row:\s*1;/);
@@ -38,6 +41,7 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /:focus-visible/);
   assert.match(js, /IntersectionObserver/);
   assert.match(js, /resolveConsultationState/);
+  assert.match(js, /selectMethodMedia/);
   assert.match(html, /data-coaching-step/g);
   assert.equal((html.match(/data-coaching-step/g) || []).length, 4);
 });
@@ -57,13 +61,22 @@ test('production validation rejects aria-disabled without the native disabled at
   t.after(() => rm(fixtureRoot, { recursive: true, force: true }));
 
   const fixtureFiles = new Map([
-    ['index.html', '<button class="consultation__button" type="button" aria-disabled="true">상담 준비 중</button>'],
+    ['index.html', '<video data-autoplay-media muted loop playsinline></video><button data-media-option></button><button data-media-option></button><button data-media-option></button><button class="consultation__button" type="button" aria-disabled="true">상담 준비 중</button>'],
     ['package.json', '{"scripts":{"test":"node --test tests/*.test.mjs"}}'],
     ['assets/css/site.css', ''],
     ['assets/js/site.js', ''],
     ['assets/js/site-behavior.js', ''],
     ['assets/js/site-config.js', ''],
     ['assets/fonts/PretendardVariable.woff2', ''],
+    ['assets/media/jeong-in-ae-hero.mp4', ''],
+    ['assets/media/jeong-in-ae-hero-poster.webp', ''],
+    ['assets/media/jeong-in-ae-profile.webp', ''],
+    ['assets/media/method-evaluate.mp4', ''],
+    ['assets/media/method-evaluate-poster.webp', ''],
+    ['assets/media/method-design.mp4', ''],
+    ['assets/media/method-design-poster.webp', ''],
+    ['assets/media/method-practice.mp4', ''],
+    ['assets/media/method-practice-poster.webp', ''],
     ['tests/site-contract.test.mjs', '']
   ]);
 

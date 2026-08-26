@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 
 const indexPath = new URL('../index.html', import.meta.url);
 
@@ -26,12 +26,36 @@ test('semantic page presents verified trainer content and an inactive consultati
   }
 
   assert.match(html, /<button\b[^>]*\bdisabled\b[^>]*aria-describedby="consultation-status"/i);
-  assert.doesNotMatch(html, /<img\b/i);
-  assert.doesNotMatch(html, /<video\b/i);
+  assert.match(html, /<video\b[^>]*data-autoplay-media[^>]*muted[^>]*loop[^>]*playsinline/i);
+  assert.match(html, /<section\b[^>]*class="method-media[^>]*aria-labelledby="method-media-title"/i);
+  assert.equal((html.match(/data-media-option/g) || []).length, 3);
+  assert.match(html, /<img\b[^>]*alt="정인애 PT팀장의 코칭 영상 미리보기/);
   assert.doesNotMatch(html, /http:\/\//i);
   assert.doesNotMatch(html, /https:\/\//i);
   assert.doesNotMatch(html, /\d{1,3}(,\d{3})+원/);
   assert.doesNotMatch(html, /AGENTS\.md/i);
+});
+
+test('trainer-owned media is shipped locally with a poster fallback for every video', async () => {
+  const html = await readFile(indexPath, 'utf8');
+  const expectedAssets = [
+    'assets/media/jeong-in-ae-hero.mp4',
+    'assets/media/jeong-in-ae-hero-poster.webp',
+    'assets/media/jeong-in-ae-profile.webp',
+    'assets/media/method-evaluate.mp4',
+    'assets/media/method-evaluate-poster.webp',
+    'assets/media/method-design.mp4',
+    'assets/media/method-design-poster.webp',
+    'assets/media/method-practice.mp4',
+    'assets/media/method-practice-poster.webp'
+  ];
+
+  for (const relativePath of expectedAssets) {
+    assert.ok(html.includes(`./${relativePath}`), `media is not referenced: ${relativePath}`);
+    await access(new URL(`../${relativePath}`, import.meta.url));
+  }
+
+  assert.doesNotMatch(html, /KakaoTalk_|20230408175442|Instagram|before|after/i);
 });
 
 test('trainer-supplied philosophy and promise details remain complete', async () => {

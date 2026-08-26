@@ -86,3 +86,75 @@ test('disabled consultation button remains natively disabled and inert', async (
   assert.equal(button.textContent, '상담 준비 중');
   assert.deepEqual(navigations, []);
 });
+
+test('method selector updates the real player, caption, and pressed state', async () => {
+  const { selectMethodMedia } = await import(behaviorModule);
+  const events = [];
+  const player = {
+    src: '',
+    poster: '',
+    paused: false,
+    pause() { events.push('pause'); this.paused = true; },
+    load() { events.push('load'); }
+  };
+  const caption = { textContent: '' };
+  const first = {
+    dataset: {
+      mediaSrc: './assets/media/method-evaluate.mp4',
+      mediaPoster: './assets/media/method-evaluate-poster.webp',
+      mediaCaption: '움직임을 보고 기준을 세웁니다.'
+    },
+    setAttribute(name, value) { this[name] = value; }
+  };
+  const second = {
+    dataset: {
+      mediaSrc: './assets/media/method-design.mp4',
+      mediaPoster: './assets/media/method-design-poster.webp',
+      mediaCaption: '목적에 맞게 동작을 조절합니다.'
+    },
+    setAttribute(name, value) { this[name] = value; }
+  };
+
+  assert.equal(selectMethodMedia(player, caption, [first, second], second), true);
+  assert.equal(player.src, './assets/media/method-design.mp4');
+  assert.equal(player.poster, './assets/media/method-design-poster.webp');
+  assert.equal(caption.textContent, '목적에 맞게 동작을 조절합니다.');
+  assert.equal(first['aria-pressed'], 'false');
+  assert.equal(second['aria-pressed'], 'true');
+  assert.deepEqual(events, ['pause', 'load']);
+});
+
+test('method selector rejects an incomplete media option without mutating playback', async () => {
+  const { selectMethodMedia } = await import(behaviorModule);
+  const events = [];
+  const player = {
+    src: 'original.mp4',
+    poster: 'original.webp',
+    pause() { events.push('pause'); },
+    load() { events.push('load'); }
+  };
+  const caption = { textContent: 'original' };
+  const incomplete = {
+    dataset: { mediaSrc: '', mediaPoster: '', mediaCaption: '' },
+    setAttribute() {}
+  };
+
+  assert.equal(selectMethodMedia(player, caption, [incomplete], incomplete), false);
+  assert.equal(player.src, 'original.mp4');
+  assert.equal(player.poster, 'original.webp');
+  assert.equal(caption.textContent, 'original');
+  assert.deepEqual(events, []);
+});
+
+test('selected method option aligns to the rail start and removes smooth motion when requested', async () => {
+  const { revealSelectedMediaOption } = await import(behaviorModule);
+  const calls = [];
+  const option = { scrollIntoView(config) { calls.push(config); } };
+
+  assert.equal(revealSelectedMediaOption(option, false), true);
+  assert.equal(revealSelectedMediaOption(option, true), true);
+  assert.deepEqual(calls, [
+    { behavior: 'smooth', block: 'nearest', inline: 'start' },
+    { behavior: 'auto', block: 'nearest', inline: 'start' }
+  ]);
+});

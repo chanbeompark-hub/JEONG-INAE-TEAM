@@ -10,6 +10,15 @@ const requiredFiles = [
   'assets/js/site-behavior.js',
   'assets/js/site-config.js',
   'assets/fonts/PretendardVariable.woff2',
+  'assets/media/jeong-in-ae-hero.mp4',
+  'assets/media/jeong-in-ae-hero-poster.webp',
+  'assets/media/jeong-in-ae-profile.webp',
+  'assets/media/method-evaluate.mp4',
+  'assets/media/method-evaluate-poster.webp',
+  'assets/media/method-design.mp4',
+  'assets/media/method-design-poster.webp',
+  'assets/media/method-practice.mp4',
+  'assets/media/method-practice-poster.webp',
   'tests/site-contract.test.mjs'
 ];
 
@@ -42,8 +51,10 @@ async function validateSite() {
   assertContract(!html.includes('1986fitnessk.github.io'), 'index.html must not include the reference-site host');
   pass('reference-site host is absent');
 
-  assertContract(!/<(?:img|video)\b/i.test(html), 'owned media is required before adding img or video elements');
-  pass('unverified img and video elements are absent');
+  assertContract(/<video\b[^>]*data-autoplay-media[^>]*muted[^>]*loop[^>]*playsinline/i.test(html), 'hero media must be muted, looping, and inline');
+  assertContract((html.match(/data-media-option/g) || []).length === 3, 'method media must expose exactly three coaching steps');
+  assertContract(!/(?:src|poster)=['"](?:https?:)?\/\//i.test(html), 'media must remain local to the project');
+  pass('verified local trainer media contract is present');
 
   const consultationButtons = html.match(/<button\b[^>]*class=["'][^"']*\bconsultation__button\b[^"']*["'][^>]*>/gi) || [];
   assertContract(consultationButtons.length > 0, 'index.html must include a consultation button');

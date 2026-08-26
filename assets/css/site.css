@@ -61,6 +61,8 @@ main > section,
 .philosophy > *,
 .promise > *,
 .promise__list > *,
+.method-media > *,
+.method-media__experience > *,
 .coaching-frame > * {
   min-width: 0;
 }
@@ -269,13 +271,24 @@ button:focus-visible {
   pointer-events: none;
 }
 
+.coaching-frame__media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(17, 18, 20, .72), rgba(17, 18, 20, .38) 52%, rgba(17, 18, 20, .66));
+  content: "";
+}
+
 .coaching-frame__media [data-project-media] {
   width: 100%;
   height: 100%;
+  filter: saturate(.72) contrast(1.08);
   object-fit: cover;
+  object-position: 50% 46%;
 }
 
 .coaching-frame__media [data-project-media-fallback] {
+  position: relative;
+  z-index: 1;
   max-width: 18rem;
   margin: 0;
   padding: var(--space-4);
@@ -394,6 +407,170 @@ button:focus-visible {
 
 .intro > p:last-child {
   margin-bottom: 0;
+}
+
+.intro__portrait {
+  position: relative;
+  width: min(42%, 28rem);
+  margin: 0 0 calc(var(--space-18) * -1) 0;
+}
+
+.intro__portrait::after {
+  position: absolute;
+  inset: var(--space-4) calc(var(--space-4) * -1) calc(var(--space-4) * -1) var(--space-4);
+  z-index: -1;
+  border: 1px solid var(--color-accent);
+  content: "";
+}
+
+.intro__portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 48%;
+  filter: saturate(.78) contrast(1.04);
+}
+
+.intro__portrait figcaption {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.method-media {
+  padding-block: var(--space-28);
+  border-top: 1px solid rgba(244, 240, 232, .18);
+}
+
+.method-media__heading {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  align-items: start;
+  margin-bottom: var(--space-18);
+}
+
+.method-media__heading h2 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 5.3rem);
+  letter-spacing: -.03em;
+}
+
+.method-media__experience {
+  display: grid;
+  grid-template-columns: minmax(20rem, 7fr) minmax(18rem, 5fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.method-media__stage {
+  position: relative;
+  height: min(70vw, 50rem);
+  min-height: 42rem;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(244, 240, 232, .24);
+  background: var(--color-ink-raised);
+}
+
+.method-media__stage video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: 50% 48%;
+  background: var(--color-ink-raised);
+}
+
+.method-media__stage figcaption,
+.method-media__stage [data-project-media-fallback] {
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  left: var(--space-6);
+  margin: 0;
+  padding: var(--space-4);
+  background: rgba(17, 18, 20, .88);
+  color: var(--color-ivory);
+  font-size: clamp(1rem, 1.5vw, 1.22rem);
+  font-weight: 650;
+  line-height: 1.5;
+  backdrop-filter: blur(8px);
+}
+
+.method-media__stage[data-media-state="error"] figcaption {
+  display: none;
+}
+
+.method-media__rail {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  height: min(70vw, 50rem);
+  min-height: 42rem;
+  border-top: 1px solid rgba(244, 240, 232, .34);
+}
+
+.method-media__option {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-6);
+  width: 100%;
+  padding: var(--space-6) 0;
+  border: 0;
+  border-bottom: 1px solid rgba(244, 240, 232, .34);
+  background: transparent;
+  color: var(--color-paper);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--motion-feedback) var(--ease-out), padding-left var(--motion-feedback) var(--ease-out);
+}
+
+.method-media__option img {
+  display: block;
+  width: 7rem;
+  height: 8rem;
+  border: 1px solid transparent;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(.7) brightness(.72);
+  transition: filter var(--motion-feedback) var(--ease-out), transform var(--motion-feedback) var(--ease-out), border-color var(--motion-feedback) var(--ease-out);
+}
+
+.method-media__option span,
+.method-media__option b {
+  display: block;
+}
+
+.method-media__option b {
+  margin-bottom: var(--space-3);
+  color: var(--color-muted);
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: .7rem;
+  letter-spacing: .12em;
+}
+
+.method-media__option:hover,
+.method-media__option[aria-pressed="true"] {
+  padding-left: var(--space-3);
+  color: var(--color-ivory);
+}
+
+.method-media__option:hover img,
+.method-media__option[aria-pressed="true"] img {
+  border-color: var(--color-accent);
+  filter: none;
+  transform: scale(.96);
+}
+
+.method-media__option[aria-pressed="true"] b {
+  color: var(--color-accent);
 }
 
 .philosophy {
@@ -789,6 +966,7 @@ button:focus-visible {
   }
 
   .intro,
+  .method-media,
   .philosophy,
   .promise,
   .consultation {
@@ -797,6 +975,71 @@ button:focus-visible {
 
   .intro > p:not(.eyebrow) {
     font-size: max(15px, 1rem);
+  }
+
+  .intro__portrait {
+    width: calc(100% - var(--space-6));
+    margin-bottom: var(--space-18);
+  }
+
+  .method-media__heading {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .method-media__experience {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .method-media__stage,
+  .method-media__stage video {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .method-media__stage figcaption,
+  .method-media__stage [data-project-media-fallback] {
+    right: var(--space-4);
+    bottom: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .method-media__rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(15rem, 78vw);
+    grid-template-rows: 1fr;
+    height: auto;
+    min-height: 0;
+    padding-right: calc(100% - 15rem);
+    gap: var(--space-4);
+    overflow-x: auto;
+    border-top: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .method-media__option {
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    gap: var(--space-4);
+    min-height: 8.25rem;
+    padding: var(--space-3);
+    border: 1px solid rgba(244, 240, 232, .28);
+    scroll-snap-align: start;
+  }
+
+  .method-media__option:hover,
+  .method-media__option[aria-pressed="true"] {
+    padding-left: var(--space-3);
+    border-color: var(--color-accent);
+  }
+
+  .method-media__option img {
+    width: 5.25rem;
+    height: 6.5rem;
   }
 
   .philosophy {

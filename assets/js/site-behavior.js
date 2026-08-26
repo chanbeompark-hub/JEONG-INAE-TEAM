@@ -33,3 +33,33 @@ export function showProjectMediaFallback(failedMedia) {
   wrapper.dataset.mediaState = 'error';
   return true;
 }
+
+export function selectMethodMedia(player, captionNode, options, selectedOption) {
+  const source = selectedOption?.dataset?.mediaSrc?.trim?.();
+  const poster = selectedOption?.dataset?.mediaPoster?.trim?.();
+  const caption = selectedOption?.dataset?.mediaCaption?.trim?.();
+  if (!player || !captionNode || !source || !poster || !caption) return false;
+
+  player.pause();
+  player.src = source;
+  player.poster = poster;
+  captionNode.textContent = caption;
+
+  for (const option of options) {
+    option.setAttribute('aria-pressed', String(option === selectedOption));
+  }
+
+  player.load();
+  return true;
+}
+
+export function revealSelectedMediaOption(option, reducedMotion) {
+  if (!option?.scrollIntoView) return false;
+
+  option.scrollIntoView({
+    behavior: reducedMotion ? 'auto' : 'smooth',
+    block: 'nearest',
+    inline: 'start'
+  });
+  return true;
+}
