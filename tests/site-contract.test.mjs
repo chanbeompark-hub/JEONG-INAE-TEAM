@@ -22,7 +22,11 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /--color-accent:\s*#d9563f/i);
   assert.match(css, /@media\s*\(max-width:\s*48rem\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?animation-duration:\s*\.01ms\s*!important/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?\.is-ready \[data-intro\],[\s\S]*?opacity:\s*1\s*!important;[\s\S]*?transform:\s*none\s*!important/);
   assert.match(css, /\.coaching-frame__steps/);
+  assert.match(css, /\.hero h1\s*\{[\s\S]*?font-size:\s*clamp\(3\.1rem,\s*5\.5vw,\s*5\.8rem\)/);
+  assert.match(css, /\.promise article:nth-child\(n\)\s*\{[\s\S]*?grid-row:\s*auto;/);
   assert.match(css, /:focus-visible/);
   assert.match(js, /IntersectionObserver/);
   assert.match(js, /resolveConsultationState/);

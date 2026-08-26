@@ -178,7 +178,7 @@ button:focus-visible {
 
 .hero h1 {
   margin-bottom: var(--space-8);
-  font-size: clamp(3.1rem, 6.25vw, 6.6rem);
+  font-size: clamp(3.1rem, 5.5vw, 5.8rem);
   font-weight: 760;
   letter-spacing: -.035em;
 }
@@ -826,23 +826,8 @@ button:focus-visible {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .promise article:nth-child(1) {
-    grid-row: 1;
-  }
-
-  .promise article:nth-child(3) {
-    grid-row: 2;
-  }
-
-  .promise article:nth-child(2) {
-    grid-row: 3;
-  }
-
-  .promise article:nth-child(4) {
-    grid-row: 4;
-  }
-
   .promise article:nth-child(n) {
+    grid-row: auto;
     grid-column: 1;
     padding: var(--space-8) 0 var(--space-12);
   }
