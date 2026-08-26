@@ -27,6 +27,10 @@ test('semantic page presents verified trainer content and an inactive consultati
 
   assert.match(html, /<button\b[^>]*\bdisabled\b[^>]*aria-describedby="consultation-status"/i);
   assert.equal((html.match(/data-hero-portrait/g) || []).length, 2);
+  assert.match(
+    html,
+    /<figure\b[^>]*class="intro__portrait"[^>]*>[\s\S]*?<img\b[^>]*src="\.\/assets\/media\/transformation-after-gym\.webp"[^>]*alt="체육관에서 자세를 보여주는 정인애 PT팀장"/i
+  );
   assert.match(html, /<section\b[^>]*class="transformation[^>]*aria-labelledby="transformation-title"/i);
   assert.match(html, /aria-label="약 30kg 감량"/i);
   assert.equal((html.match(/data-transformation-image="before"/g) || []).length, 2);

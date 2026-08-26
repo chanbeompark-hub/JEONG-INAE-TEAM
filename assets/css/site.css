@@ -394,8 +394,9 @@ button:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 5;
+  height: auto;
   object-fit: cover;
-  object-position: 50% 48%;
+  object-position: 52% 50%;
   filter: saturate(.78) contrast(1.04);
 }
 
