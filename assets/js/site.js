@@ -1,5 +1,9 @@
 import { SITE_CONFIG, resolveConsultationState } from './site-config.js';
-import { configureConsultationButton, showProjectMediaFallback } from './site-behavior.js';
+import {
+  configureConsultationButton,
+  resolveMotionPreference,
+  showProjectMediaFallback
+} from './site-behavior.js';
 
 const buttons = [...document.querySelectorAll('.consultation__button')];
 const statusNodes = [...document.querySelectorAll('[data-consultation-status]')];
@@ -17,9 +21,18 @@ if (buttons.length && statusNodes.length && revealNodes.length && coachingFrame)
     statusNode.textContent = consultation.status;
   }
 
+  const motionPreference = resolveMotionPreference(
+    window.location,
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+
+  if (motionPreference.qaOverride) {
+    document.documentElement.dataset.qaReducedMotion = 'true';
+  }
+
   document.documentElement.classList.add('is-ready');
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = motionPreference.reduced;
   const revealImmediately = prefersReducedMotion || !('IntersectionObserver' in window);
 
   if (revealImmediately) {

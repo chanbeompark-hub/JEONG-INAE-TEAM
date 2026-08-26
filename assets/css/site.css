@@ -885,3 +885,27 @@ button:focus-visible {
     transform: none !important;
   }
 }
+
+/* Local-only QA state mirrors the reduced-motion final cascade without changing OS settings. */
+html[data-qa-reduced-motion="true"] *,
+html[data-qa-reduced-motion="true"] *::before,
+html[data-qa-reduced-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: .01ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+  transition-delay: 0ms !important;
+}
+
+html[data-qa-reduced-motion="true"].is-ready [data-intro],
+html[data-qa-reduced-motion="true"].is-ready [data-reveal],
+html[data-qa-reduced-motion="true"].is-ready [data-reveal].is-visible,
+html[data-qa-reduced-motion="true"] .coaching-frame,
+html[data-qa-reduced-motion="true"] .coaching-frame::before,
+html[data-qa-reduced-motion="true"] .coaching-frame__steps li,
+html[data-qa-reduced-motion="true"] a::after,
+html[data-qa-reduced-motion="true"] .promise article::before {
+  opacity: 1 !important;
+  transform: none !important;
+}

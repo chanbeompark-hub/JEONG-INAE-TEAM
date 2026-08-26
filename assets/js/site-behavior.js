@@ -1,3 +1,15 @@
+export function resolveMotionPreference(locationLike, mediaReducedMotion) {
+  const localHosts = new Set(['127.0.0.1', 'localhost']);
+  const parameters = new URLSearchParams(locationLike?.search || '');
+  const qaOverride = localHosts.has(locationLike?.hostname || '')
+    && parameters.get('qa-reduced-motion') === '1';
+
+  return {
+    reduced: Boolean(mediaReducedMotion || qaOverride),
+    qaOverride
+  };
+}
+
 export function configureConsultationButton(button, consultation, navigate) {
   button.textContent = consultation.label;
   button.disabled = !consultation.enabled;
