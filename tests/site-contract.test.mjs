@@ -27,6 +27,14 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /\.coaching-frame__steps/);
   assert.match(css, /\.hero h1\s*\{[\s\S]*?font-size:\s*clamp\(3\.1rem,\s*5\.5vw,\s*5\.8rem\)/);
   assert.match(css, /\.promise article:nth-child\(n\)\s*\{[\s\S]*?grid-row:\s*auto;/);
+  assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.promise article:nth-child\(1\)\s*\{\s*grid-row:\s*1;/);
+  assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.promise article:nth-child\(3\)\s*\{\s*grid-row:\s*2;/);
+  assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.promise article:nth-child\(2\)\s*\{\s*grid-row:\s*3;/);
+  assert.match(css, /@media\s*\(max-width:\s*48rem\)[\s\S]*?\.promise article:nth-child\(4\)\s*\{\s*grid-row:\s*4;/);
+  assert.match(css, /--motion-intro:\s*720ms/);
+  assert.match(css, /\.is-ready \.hero__action\s*\{\s*animation-delay:\s*180ms;/);
+  assert.match(css, /\.is-ready \.coaching-frame__steps li\s*\{\s*animation:\s*assemble-node\s+360ms/);
+  assert.match(css, /\.is-ready \.coaching-frame__steps li:nth-child\(4\)\s*\{\s*animation-delay:\s*540ms;/);
   assert.match(css, /:focus-visible/);
   assert.match(js, /IntersectionObserver/);
   assert.match(js, /resolveConsultationState/);

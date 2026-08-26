@@ -27,7 +27,7 @@
   --radius-md: 8px;
   --motion-feedback: 180ms;
   --motion-reveal: 560ms;
-  --motion-intro: 900ms;
+  --motion-intro: 720ms;
   --ease-out: cubic-bezier(.22, 1, .36, 1);
 }
 
@@ -606,7 +606,7 @@ button:focus-visible {
   letter-spacing: .14em;
 }
 
-/* assemble coaching standard: coordinated hero copy, axis, and four method nodes */
+/* assemble coaching standard: every delayed element resolves by 900ms. */
 .is-ready [data-intro] {
   animation: assemble-standard var(--motion-intro) var(--ease-out) backwards;
 }
@@ -624,13 +624,13 @@ button:focus-visible {
 }
 
 .is-ready .coaching-frame__steps li {
-  animation: assemble-node 440ms var(--ease-out) backwards;
+  animation: assemble-node 360ms var(--ease-out) backwards;
 }
 
-.is-ready .coaching-frame__steps li:nth-child(1) { animation-delay: 260ms; }
-.is-ready .coaching-frame__steps li:nth-child(2) { animation-delay: 340ms; }
+.is-ready .coaching-frame__steps li:nth-child(1) { animation-delay: 180ms; }
+.is-ready .coaching-frame__steps li:nth-child(2) { animation-delay: 300ms; }
 .is-ready .coaching-frame__steps li:nth-child(3) { animation-delay: 420ms; }
-.is-ready .coaching-frame__steps li:nth-child(4) { animation-delay: 500ms; }
+.is-ready .coaching-frame__steps li:nth-child(4) { animation-delay: 540ms; }
 
 @keyframes assemble-standard {
   from { opacity: 0; transform: translateY(18px); }
@@ -830,6 +830,23 @@ button:focus-visible {
     grid-row: auto;
     grid-column: 1;
     padding: var(--space-8) 0 var(--space-12);
+  }
+
+  /* Mobile reading order: monitoring → accessible explanation → injury prevention → lifestyle. */
+  .promise article:nth-child(1) {
+    grid-row: 1;
+  }
+
+  .promise article:nth-child(3) {
+    grid-row: 2;
+  }
+
+  .promise article:nth-child(2) {
+    grid-row: 3;
+  }
+
+  .promise article:nth-child(4) {
+    grid-row: 4;
   }
 
   .consultation__button {
