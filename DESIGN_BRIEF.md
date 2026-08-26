@@ -4,7 +4,7 @@
 A prospective PT member reads Jeong In-ae's evaluation-led coaching approach to decide whether this is a trainer they can trust; the current result is an honest consultation-preparing state.
 
 ## Direction
-An asymmetric Korean editorial coaching page uses a vertical assessment line, large declarations, and alternating ink/ivory surfaces to move from visitor tension to method, proof structure, and a truthful inactive CTA.
+An asymmetric Korean editorial coaching page uses a bright rose-ivory field, soft blush surfaces, plum typography, and a restrained rose assessment line to feel warmer and more feminine without weakening the trainer's professional authority.
 
 ## Brand reading
 - Immutable identity: 1986 Fitness Jichuk; Jeong In-ae; PT team leader; supplied philosophy and four promises.
@@ -22,7 +22,7 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 ## Reference synthesis
 - Structure comes from: the reference hero's asymmetric two-column reading order and its numbered method progression.
 - Interaction comes from: the reference plan-card feedback, translated only into explicit disabled-state semantics for the current consultation action.
-- Visual tone comes from: alternating dark/light editorial surfaces, restrained labels, large Korean declarations, and thin alignment rules, recolored for Jeong In-ae's identity.
+- Visual tone comes from: bright rose-ivory editorial surfaces, restrained plum labels, large Korean declarations, and thin rose alignment rules, with deep plum reserved for high-contrast proof sections.
 - Hook/copy energy comes from: the reference's tension-to-promise rhythm, rewritten exclusively with the supplied coaching philosophy and verified identity.
 - Motion/media behavior comes from: the reference `arrive` sequence and consistent comparison framing; motion becomes a coaching-standard assembly, while comparison media remains a future extension.
 - The final screen will not copy: the reference trainer's identity, wording, prices, member imagery, logo treatment, navy palette, or complete layout.
@@ -55,9 +55,9 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 
 ## Tokens
 - Font: local Pretendard Variable for Korean; Arial Narrow/Arial fallback for Latin labels.
-- Text colors: #F4F0E8 on ink; #151515 on ivory; #A6A29A for supporting copy.
-- Surface colors: #111214 ink; #F4F0E8 ivory; #222326 raised ink.
-- Accent and semantic colors: #D9563F vermilion; #77736D disabled text.
+- Text colors: #33272D primary plum; #4B3942 supporting plum; #826B75 accessible muted mauve; #FFF8F7 on media and deep-plum sections.
+- Surface colors: #FFF8F7 rose ivory; #F2E3E1 blush beige; #33272D deep plum proof surface.
+- Accent and semantic colors: #C86F82 restrained rose; #A08B94 disabled border; #6F5C65 disabled text.
 - Spacing steps: 4, 8, 12, 16, 24, 32, 48, 72, 112px.
 - Radius: 0, 4, 8px.
 - Border and shadow: 1px low-contrast rules; no decorative card shadow.
@@ -98,6 +98,9 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 - Text-clipping viewports: inspect 320px, 360px, 390px, and 430px for horizontal overflow, Korean orphan syllables, CTA wrapping, and heading collisions.
 
 ## Verification captures
+- `artifacts/qa/palette-desktop-first-viewport.png`: 1440×900 rose-ivory first viewport with deep-plum typography, restrained rose rules, the supplied two-photo hero, and no horizontal overflow.
+- `artifacts/qa/palette-mobile-390-first-viewport.png`: 390×844 mobile first viewport with the same palette, intact Korean line breaks, intentional portrait crop, and no horizontal overflow.
+- Palette runtime QA: live computed styles resolved `body` to `rgb(255, 248, 247)` / `rgb(51, 39, 45)`, `color-scheme: light`, and the proof canvas to `rgb(51, 39, 45)` / `rgb(255, 248, 247)`. Live 320/360/390/430px checks all reported `scrollWidth === clientWidth`.
 - Current credentials-profile QA: live 1440×900 inspection loaded the optimized 966×683 profile at its full readable size; live 390×844 inspection rendered it at 311×220 with the complete portrait, role, credential, and career composition visible, zero document overflow, and no crop.
 - Current live visual QA: 1440×900 first viewport confirmed the requested first image as the dominant hero and the second as the inset portrait; the transformation viewport confirmed the asymmetric 2→3 image story and legible `약 30 KG 감량` evidence line.
 - Current mobile QA: 390×844 confirmed the two-tile BEFORE row and large-plus-two AFTER mosaic; 320×700 confirmed `scrollWidth === clientWidth`, all headings within their boxes, both hero portraits loaded, and exact BEFORE/AFTER counts of 2/3. Browser warnings/errors: `0`.

@@ -18,8 +18,12 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
 
   assert.match(css, /@font-face/);
   assert.match(css, /PretendardVariable\.woff2/);
-  assert.match(css, /--color-ink:\s*#111214/i);
-  assert.match(css, /--color-accent:\s*#d9563f/i);
+  assert.match(css, /--color-ink:\s*#fff8f7/i);
+  assert.match(css, /--color-ink-raised:\s*#f2e3e1/i);
+  assert.match(css, /--color-ivory:\s*#33272d/i);
+  assert.match(css, /--color-paper:\s*#4b3942/i);
+  assert.match(css, /--color-muted:\s*#826b75/i);
+  assert.match(css, /--color-accent:\s*#c86f82/i);
   assert.match(css, /@media\s*\(max-width:\s*48rem\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?animation-duration:\s*\.01ms\s*!important/);
