@@ -10,7 +10,7 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 - Immutable identity: 1986 Fitness Jichuk; Jeong In-ae; PT team leader; supplied philosophy and four promises.
 - Repeatable shapes/materials: alignment lines, numbered stages, edge-to-edge surface changes, thin rules, 0–8px corners.
 - Existing inconsistencies to remove: generic equal cards, unverified fitness claims, fake member imagery, decorative metrics.
-- Media provenance: the user explicitly supplied local trainer photos and coaching videos from `C:\Users\박찬범\Downloads\정인애`. On 2026-08-27 they specifically authorized the six named trainer images for a two-photo hero and a five-image personal before/after story, and supplied the factual claim `약 30kg 감량`. Web-optimized derivatives ship; originals remain untouched. No member transformation claim is introduced.
+- Media provenance: the user explicitly supplied local trainer photos, coaching videos, and a trainer credentials graphic from `C:\Users\박찬범\Downloads\정인애`. On 2026-08-27 they authorized the studio pair, five-image personal before/after story, factual claim `약 30kg 감량`, and the credentials graphic for the trust-focused introduction. Web-optimized derivatives ship; originals remain untouched. No member transformation claim is introduced.
 
 ## Reference evidence
 - Source: `https://1986fitnessk.github.io/park-minseok-renewal/han-seulgi-renewal/`, inspected 2026-08-26 as recorded in the approved specification.
@@ -79,7 +79,7 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 - Core Korean copy and the disabled consultation state remain readable without JavaScript.
 - The current CTA remains a native disabled button and performs no navigation or external transmission.
 - Relative asset paths remain compatible with a GitHub Pages subpath.
-- No prices, testimonials, credentials, performance metrics, contact details, gallery placeholder, or unverified media are introduced.
+- No prices, testimonials, performance metrics, contact details, gallery placeholder, or unverified media are introduced. Trainer credentials appear only through the user-supplied profile graphic.
 - The supplied `약 30kg 감량` statement is identified as Jeong In-ae's personal experience, not a guaranteed member outcome.
 - Consultation configuration can be replaced without restructuring the semantic page.
 - Supplied media is referenced through relative GitHub Pages-safe paths. Every video has a local poster and the existing event-driven `[data-project-media]` fallback remains the failure contract.
@@ -98,6 +98,7 @@ An asymmetric Korean editorial coaching page uses a vertical assessment line, la
 - Text-clipping viewports: inspect 320px, 360px, 390px, and 430px for horizontal overflow, Korean orphan syllables, CTA wrapping, and heading collisions.
 
 ## Verification captures
+- Current credentials-profile QA: live 1440×900 inspection loaded the optimized 966×683 profile at its full readable size; live 390×844 inspection rendered it at 311×220 with the complete portrait, role, credential, and career composition visible, zero document overflow, and no crop.
 - Current live visual QA: 1440×900 first viewport confirmed the requested first image as the dominant hero and the second as the inset portrait; the transformation viewport confirmed the asymmetric 2→3 image story and legible `약 30 KG 감량` evidence line.
 - Current mobile QA: 390×844 confirmed the two-tile BEFORE row and large-plus-two AFTER mosaic; 320×700 confirmed `scrollWidth === clientWidth`, all headings within their boxes, both hero portraits loaded, and exact BEFORE/AFTER counts of 2/3. Browser warnings/errors: `0`.
 - `artifacts/qa/media-desktop-first-viewport.png`: 1440×900 supplied hero video inside the Coaching Standard Frame with the disabled consultation action preserved.

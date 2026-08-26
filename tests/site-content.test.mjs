@@ -29,7 +29,7 @@ test('semantic page presents verified trainer content and an inactive consultati
   assert.equal((html.match(/data-hero-portrait/g) || []).length, 2);
   assert.match(
     html,
-    /<figure\b[^>]*class="intro__portrait"[^>]*>[\s\S]*?<img\b[^>]*src="\.\/assets\/media\/transformation-after-gym\.webp"[^>]*alt="체육관에서 자세를 보여주는 정인애 PT팀장"/i
+    /<figure\b[^>]*class="intro__portrait"[^>]*>[\s\S]*?<img\b[^>]*src="\.\/assets\/media\/trainer-credentials\.webp"[^>]*alt="정인애 PT팀장의 자격과 경력을 소개하는 프로필"/i
   );
   assert.match(html, /<section\b[^>]*class="transformation[^>]*aria-labelledby="transformation-title"/i);
   assert.match(html, /aria-label="약 30kg 감량"/i);
@@ -49,6 +49,7 @@ test('trainer-owned media is shipped locally with a poster fallback for every vi
   const expectedAssets = [
     'assets/media/hero-studio-wide.webp',
     'assets/media/hero-studio-seated.webp',
+    'assets/media/trainer-credentials.webp',
     'assets/media/transformation-after-studio.webp',
     'assets/media/transformation-after-gym.webp',
     'assets/media/transformation-before-rear.webp',

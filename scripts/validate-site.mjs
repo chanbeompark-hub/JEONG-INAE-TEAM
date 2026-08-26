@@ -15,6 +15,7 @@ const requiredFiles = [
   'assets/media/jeong-in-ae-profile.webp',
   'assets/media/hero-studio-wide.webp',
   'assets/media/hero-studio-seated.webp',
+  'assets/media/trainer-credentials.webp',
   'assets/media/transformation-after-studio.webp',
   'assets/media/transformation-after-gym.webp',
   'assets/media/transformation-before-rear.webp',

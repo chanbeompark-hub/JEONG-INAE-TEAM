@@ -25,7 +25,7 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?animation-duration:\s*\.01ms\s*!important/);
   assert.match(css, /prefers-reduced-motion:\s*reduce\)[\s\S]*?\.is-ready \[data-intro\],[\s\S]*?opacity:\s*1\s*!important;[\s\S]*?transform:\s*none\s*!important/);
   assert.match(css, /\.coaching-frame__portrait-duo/);
-  assert.match(css, /\.intro__portrait img\s*\{[^}]*aspect-ratio:\s*4\s*\/\s*5;[^}]*height:\s*auto;/);
+  assert.match(css, /\.intro__portrait img\s*\{[^}]*aspect-ratio:\s*966\s*\/\s*683;[^}]*height:\s*auto;/);
   assert.match(css, /\.transformation__comparison/);
   assert.match(css, /\.transformation__before/);
   assert.match(css, /\.transformation__after/);
@@ -77,6 +77,7 @@ test('production validation rejects aria-disabled without the native disabled at
     ['assets/media/jeong-in-ae-profile.webp', ''],
     ['assets/media/hero-studio-wide.webp', ''],
     ['assets/media/hero-studio-seated.webp', ''],
+    ['assets/media/trainer-credentials.webp', ''],
     ['assets/media/transformation-after-studio.webp', ''],
     ['assets/media/transformation-after-gym.webp', ''],
     ['assets/media/transformation-before-rear.webp', ''],

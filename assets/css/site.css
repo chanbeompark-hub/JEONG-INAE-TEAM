@@ -378,8 +378,8 @@ button:focus-visible {
 
 .intro__portrait {
   position: relative;
-  width: min(42%, 28rem);
-  margin: 0 0 calc(var(--space-18) * -1) 0;
+  width: min(82%, 60.375rem);
+  margin: 0 0 var(--space-18);
 }
 
 .intro__portrait::after {
@@ -393,11 +393,9 @@ button:focus-visible {
 .intro__portrait img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 966 / 683;
   height: auto;
-  object-fit: cover;
-  object-position: 52% 50%;
-  filter: saturate(.78) contrast(1.04);
+  object-fit: contain;
 }
 
 .intro__portrait figcaption {
