@@ -1,5 +1,5 @@
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, realpath } from 'node:fs/promises';
 import { extname, isAbsolute, relative, resolve, sep } from 'node:path';
 
 const MIME_TYPES = new Map([
@@ -15,7 +15,7 @@ const MIME_TYPES = new Map([
   ['.svg', 'image/svg+xml; charset=utf-8']
 ]);
 
-const projectRoot = resolve(process.cwd());
+const projectRoot = await realpath(process.cwd());
 const port = Number.parseInt(process.env.PORT || '4173', 10);
 
 function send(response, statusCode, body, contentType = 'text/plain; charset=utf-8') {
@@ -47,8 +47,20 @@ createServer(async (request, response) => {
   }
 
   try {
-    const body = await readFile(filePath);
-    const contentType = MIME_TYPES.get(extname(filePath).toLowerCase()) || 'application/octet-stream';
+    const actualFilePath = await realpath(filePath);
+    const actualRelativePath = relative(projectRoot, actualFilePath);
+
+    if (
+      actualRelativePath === '..' ||
+      actualRelativePath.startsWith(`..${sep}`) ||
+      isAbsolute(actualRelativePath)
+    ) {
+      send(response, 403, 'Forbidden');
+      return;
+    }
+
+    const body = await readFile(actualFilePath);
+    const contentType = MIME_TYPES.get(extname(actualFilePath).toLowerCase()) || 'application/octet-stream';
     send(response, 200, body, contentType);
   } catch (error) {
     if (error?.code === 'ENOENT') {
