@@ -13,6 +13,12 @@ const requiredFiles = [
   'assets/media/jeong-in-ae-hero.mp4',
   'assets/media/jeong-in-ae-hero-poster.webp',
   'assets/media/jeong-in-ae-profile.webp',
+  'assets/media/hero-studio-wide.webp',
+  'assets/media/hero-studio-seated.webp',
+  'assets/media/transformation-after-studio.webp',
+  'assets/media/transformation-after-gym.webp',
+  'assets/media/transformation-before-rear.webp',
+  'assets/media/transformation-before-lifestyle.webp',
   'assets/media/method-evaluate.mp4',
   'assets/media/method-evaluate-poster.webp',
   'assets/media/method-design.mp4',
@@ -51,7 +57,10 @@ async function validateSite() {
   assertContract(!html.includes('1986fitnessk.github.io'), 'index.html must not include the reference-site host');
   pass('reference-site host is absent');
 
-  assertContract(/<video\b[^>]*data-autoplay-media[^>]*muted[^>]*loop[^>]*playsinline/i.test(html), 'hero media must be muted, looping, and inline');
+  assertContract((html.match(/data-hero-portrait/g) || []).length === 2, 'hero must contain exactly two supplied trainer portraits');
+  assertContract((html.match(/data-transformation-image="before"/g) || []).length === 2, 'transformation story must contain exactly two before images');
+  assertContract((html.match(/data-transformation-image="after"/g) || []).length === 3, 'transformation story must contain exactly three after images');
+  assertContract(html.includes('aria-label="약 30kg 감량"'), 'transformation story must identify the supplied personal 30kg claim');
   assertContract((html.match(/data-media-option/g) || []).length === 3, 'method media must expose exactly three coaching steps');
   assertContract(!/(?:src|poster)=['"](?:https?:)?\/\//i.test(html), 'media must remain local to the project');
   pass('verified local trainer media contract is present');

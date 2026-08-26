@@ -26,7 +26,11 @@ test('semantic page presents verified trainer content and an inactive consultati
   }
 
   assert.match(html, /<button\b[^>]*\bdisabled\b[^>]*aria-describedby="consultation-status"/i);
-  assert.match(html, /<video\b[^>]*data-autoplay-media[^>]*muted[^>]*loop[^>]*playsinline/i);
+  assert.equal((html.match(/data-hero-portrait/g) || []).length, 2);
+  assert.match(html, /<section\b[^>]*class="transformation[^>]*aria-labelledby="transformation-title"/i);
+  assert.match(html, /aria-label="약 30kg 감량"/i);
+  assert.equal((html.match(/data-transformation-image="before"/g) || []).length, 2);
+  assert.equal((html.match(/data-transformation-image="after"/g) || []).length, 3);
   assert.match(html, /<section\b[^>]*class="method-media[^>]*aria-labelledby="method-media-title"/i);
   assert.equal((html.match(/data-media-option/g) || []).length, 3);
   assert.match(html, /<img\b[^>]*alt="정인애 PT팀장의 코칭 영상 미리보기/);
@@ -39,9 +43,12 @@ test('semantic page presents verified trainer content and an inactive consultati
 test('trainer-owned media is shipped locally with a poster fallback for every video', async () => {
   const html = await readFile(indexPath, 'utf8');
   const expectedAssets = [
-    'assets/media/jeong-in-ae-hero.mp4',
-    'assets/media/jeong-in-ae-hero-poster.webp',
-    'assets/media/jeong-in-ae-profile.webp',
+    'assets/media/hero-studio-wide.webp',
+    'assets/media/hero-studio-seated.webp',
+    'assets/media/transformation-after-studio.webp',
+    'assets/media/transformation-after-gym.webp',
+    'assets/media/transformation-before-rear.webp',
+    'assets/media/transformation-before-lifestyle.webp',
     'assets/media/method-evaluate.mp4',
     'assets/media/method-evaluate-poster.webp',
     'assets/media/method-design.mp4',
@@ -55,7 +62,7 @@ test('trainer-owned media is shipped locally with a poster fallback for every vi
     await access(new URL(`../${relativePath}`, import.meta.url));
   }
 
-  assert.doesNotMatch(html, /KakaoTalk_|20230408175442|Instagram|before|after/i);
+  assert.doesNotMatch(html, /KakaoTalk_|20230408175442|Instagram/i);
 });
 
 test('trainer-supplied philosophy and promise details remain complete', async () => {
