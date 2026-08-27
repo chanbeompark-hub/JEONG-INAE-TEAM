@@ -47,6 +47,7 @@ test('site keeps the visual, responsive, and progressive-enhancement contract', 
   assert.match(css, /\.is-ready \.hero__action\s*\{\s*animation-delay:\s*180ms;/);
   assert.match(css, /\.is-ready \.coaching-frame__portrait--secondary\s*\{\s*animation-delay:\s*240ms;/);
   assert.match(css, /:focus-visible/);
+  assert.match(css, /\.consultation__button:not\(:disabled\)[\s\S]*?cursor:\s*pointer/);
   assert.match(js, /IntersectionObserver/);
   assert.match(js, /resolveConsultationState/);
   assert.match(js, /selectMethodMedia/);

@@ -4,7 +4,7 @@ import { access, readFile } from 'node:fs/promises';
 
 const indexPath = new URL('../index.html', import.meta.url);
 
-test('semantic page presents verified trainer content and an inactive consultation state', async () => {
+test('semantic page presents verified trainer content and the approved survey action', async () => {
   const html = await readFile(indexPath, 'utf8');
 
   assert.equal((html.match(/<h1\b/gi) || []).length, 1);
@@ -19,8 +19,8 @@ test('semantic page presents verified trainer content and an inactive consultati
     '지도 경험 기반의 부상 예방 트레이닝',
     '눈높이에 맞춘 세심하고 다정한 설명',
     '지속 가능한 건강한 라이프스타일 디자인',
-    '상담 준비 중',
-    '상담 채널을 준비하고 있습니다.'
+    '상담 신청 설문하기',
+    '설문 결과를 통해 상담을 이어가실 수 있습니다.'
   ]) {
     assert.ok(html.includes(requiredCopy), `missing required copy: ${requiredCopy}`);
   }

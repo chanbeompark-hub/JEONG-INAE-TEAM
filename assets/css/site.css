@@ -889,6 +889,21 @@ button:focus-visible {
   color: #6f5c65;
   font: inherit;
   font-weight: 700;
+  transition: background var(--motion-feedback) var(--ease-out), border-color var(--motion-feedback) var(--ease-out), color var(--motion-feedback) var(--ease-out), box-shadow var(--motion-feedback) var(--ease-out), transform var(--motion-feedback) var(--ease-out);
+}
+
+.consultation__button:not(:disabled) {
+  border-color: var(--color-ivory);
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.consultation__button:not(:disabled):hover {
+  border-color: var(--color-paper);
+  background: var(--color-paper);
+  box-shadow: 0 10px 24px rgba(200, 111, 130, .22);
+  transform: translateY(-2px);
 }
 
 .consultation__button:disabled {
